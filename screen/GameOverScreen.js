@@ -1,8 +1,10 @@
 import React from "react";
-import { StyleSheet, View, Button, Image } from "react-native";
+import { StyleSheet, View, Button, Image, Text } from "react-native";
 
 import TitleText from "../components/TitleText";
 import BodyText from "../components/BodyText";
+import * as Colors from "../constants/colors";
+import MainButton from "../components/MainButton";
 
 const GameOverScreen = (props) => {
   return (
@@ -13,23 +15,25 @@ const GameOverScreen = (props) => {
       <View style={styles.imageContainer}>
         <Image
           style={styles.image}
-          // source={require("../assets/success.png")}
+          source={require("../assets/success.png")}
           fadeDuration={500}
-          source={{
-            uri:
-              "https://s3.amazonaws.com/images.gearjunkie.com/uploads/2018/05/matterhorn-3x2.jpg",
-          }}
+          // source={{
+          //   uri:
+          //     "https://s3.amazonaws.com/images.gearjunkie.com/uploads/2018/05/matterhorn-3x2.jpg",
+          // }}
         />
       </View>
       <View style={styles.textContainer}>
-        <BodyText style={styles.text}>
-          Número ingresado: {props.guessNumber}
-        </BodyText>
-        <BodyText style={styles.text}>
-          Rondas realizadas: {props.rounds}
-        </BodyText>
+        <View style={styles.resultContainer}>
+          <BodyText style={styles.text}>
+            Tu teléfono ha necesitado{" "}
+            <Text style={styles.highlight}>{props.guessNumber}</Text> rondas
+            para adivinar el número{" "}
+            <Text style={styles.highlight}>{props.rounds}</Text>
+          </BodyText>
+        </View>
       </View>
-      <Button title='Jugar de Nuevo' onPress={props.onRestart} />
+      <MainButton onPress={props.onRestart}>Jugar de nuevo</MainButton>
     </View>
   );
 };
@@ -48,6 +52,15 @@ const styles = StyleSheet.create({
   },
   text: {
     fontSize: 18,
+    textAlign: "center",
+    marginVertical: 15,
+  },
+  resultContainer: {
+    marginHorizontal: 20,
+  },
+  highlight: {
+    color: Colors.primary,
+    fontFamily: "open-sans-bold",
   },
   imageContainer: {
     width: 285,
